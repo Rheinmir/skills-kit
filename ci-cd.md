@@ -5,6 +5,10 @@ allowed-tools: Bash, Read, Glob, Grep
 
 Người dùng muốn push code và/hoặc hiểu luồng CI/CD của repo hiện tại.
 
+**Detect mode từ input:**
+- Nếu input bắt đầu bằng `f` hoặc `force` → **FORCE MODE**: push ngay không hỏi, report sau
+- Không có prefix → **NORMAL MODE**: hỏi xác nhận trước khi push
+
 **Thực hiện theo thứ tự:**
 
 **1. Scan file triển khai (parallel)**
@@ -60,13 +64,16 @@ Hiển thị:
 - Files chưa commit
 - Commits chưa push
 
-**5. Hỏi user xác nhận trước khi push**
+**5. Push theo mode**
 
-Nếu có commits chưa push:
-> Có **N commit** chưa push lên `<branch>`. Push để trigger pipeline không? (yes/no)
+**NORMAL MODE** — hỏi trước:
+- Nếu có commits chưa push → hỏi: `Có N commit chưa push lên <branch>. Push để trigger pipeline không?`
+- Nếu user confirm → `git push`
+- Nếu còn file chưa commit → hỏi có muốn commit trước không
 
-Nếu user confirm → chạy `git push` và báo kết quả.
+**FORCE MODE** (`f` prefix) — không hỏi:
+- Nếu có file chưa commit → `git add -A && git commit -m "chore: force deploy"` rồi push
+- Nếu chỉ có commits chưa push → `git push` ngay
+- Sau khi push xong mới output report và kết quả
 
-Nếu còn file chưa commit → hỏi có muốn commit trước không, nếu có thì hỏi commit message.
-
-**Không tự push mà không hỏi.**
+**Không tự push mà không hỏi — trừ khi FORCE MODE.**
