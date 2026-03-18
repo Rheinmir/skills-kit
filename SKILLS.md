@@ -11,6 +11,7 @@
 | `/docker-ops <args>` | Check status, build, update container, cleanup | Orchestration (k8s, swarm) |
 | `/mcp-research <query>` | Tra API spec, DB schema, docs từ GitHub/internal | Câu hỏi về code trong repo hiện tại |
 | `/yolo` | Chạy tới cùng không hỏi, snapshot trước | Khi cần review từng bước |
+| `/mornin` | Đầu buổi — load memory, check git + container, brief next action | Giữa chừng công việc |
 | `/call-it-a-day` | Wrap-up session, lưu memory, tắt máy | Giữa chừng công việc |
 
 ---
@@ -18,6 +19,10 @@
 ## Daily flow
 
 ### Buổi sáng — mở project cũ
+```
+/mornin              → load memory + git + container, brief next action (1 lệnh thay 3)
+```
+hoặc thủ công:
 ```
 /explore-repo        → nhớ lại stack, entry point, run/test command
 /docker-ops          → container nào chạy, cái nào chết
