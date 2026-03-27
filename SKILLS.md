@@ -1,61 +1,75 @@
-# Skills — cheat sheet
+# Skills Kit
 
-## Mỗi skill làm gì
+44 skills — gọi bằng `/skill-name` trong Claude Code.
 
-| Skill | Dùng khi | Không dùng khi |
-|-------|----------|----------------|
-| `/explore-repo` | Mở project cũ, quên structure, trace entry point | Đã nhớ rõ code |
-| `/fix-issue <mô tả>` | Fix bug, thêm feature nhỏ — tự scope + test | Refactor lớn, chưa rõ yêu cầu |
-| `/review-safe <file>` | Audit bảo mật/logic trước khi merge, read-only | Muốn sửa luôn |
-| `/git-helper <mode>` | Đặt tên branch, viết commit, changelog, PR desc | Thao tác git phức tạp (rebase, conflict) |
-| `/docker-ops <args>` | Check status, build, update container, cleanup | Orchestration (k8s, swarm) |
-| `/mcp-research <query>` | Tra API spec, DB schema, docs từ GitHub/internal | Câu hỏi về code trong repo hiện tại |
-| `/yolo` | Chạy tới cùng không hỏi, snapshot trước | Khi cần review từng bước |
-| `/mornin` | Đầu buổi — load memory, check git + container, brief next action | Giữa chừng công việc |
-| `/call-it-a-day` | Wrap-up session, lưu memory, tắt máy | Giữa chừng công việc |
+## Originals
 
----
+| Skill | Mô tả |
+|-------|-------|
+| `call-it-a-day` | Wrap-up session — lưu memory, tắt máy |
+| `ci-cd` | Push git, report pipeline |
+| `docker-ops` | Quản lý Docker containers |
+| `explore-repo` | Map repo + Mermaid diagram |
+| `git-helper` | Branch, commit msg, PR summary |
+| `mcp-research` | Fetch docs/API qua MCP |
+| `mornin` | Khởi động buổi sáng |
+| `review-safe` | Code audit read-only |
+| `snapshot` / `ss` | Backup + rollback |
 
-## Daily flow
+## Upgraded (OMC-powered)
 
-### Buổi sáng — mở project cũ
-```
-/mornin              → load memory + git + container, brief next action (1 lệnh thay 3)
-```
-hoặc thủ công:
-```
-/explore-repo        → nhớ lại stack, entry point, run/test command
-/docker-ops          → container nào chạy, cái nào chết
-/git-helper branch   → đang ở đâu, diff với main thế nào
-```
+| Skill | Thay thế | Mạnh hơn ở |
+|-------|----------|------------|
+| `yta` / `yolo` | autopilot | Loop đến khi xong, có verification |
+| `fix-issue` | ultraqa | QA loop test→fix→repeat |
 
-### Làm việc
-```
-/git-helper branch feat/xxx   → tên branch mới
-/fix-issue <mô tả>            → fix + viết test
-/review-safe <file>           → self-review trước commit
-/git-helper commit            → commit message từ staged changes
-```
+## OMC — Multi-agent & Orchestration
 
-### Cần tra cứu ngoài repo
-```
-/mcp-research <câu hỏi>       → API endpoint, schema, config key
-```
+| Skill | Mô tả |
+|-------|-------|
+| `autopilot` | Full autonomous A→Z |
+| `ralph` | Loop self-referential đến khi xong |
+| `ultrawork` | Parallel execution nhiều task |
+| `ultraqa` | QA loop: test→fix→verify |
+| `team` | N agents trên shared task pool |
+| `omc-teams` | Spawn Claude/Codex/Gemini trong tmux |
+| `cancel` | Hủy bất kỳ OMC mode |
 
-### Ship
-```
-/docker-ops update <service>        → rebuild + recreate
-/git-helper pr                      → PR title + summary + risk
-/git-helper changelog v1.0..v1.1   → release notes
-```
+## OMC — Planning & Research
 
----
+| Skill | Mô tả |
+|-------|-------|
+| `plan` | Strategic planning |
+| `ralplan` | Plan với 3 agents đến đồng thuận |
+| `deep-interview` | Phỏng vấn Socratic làm rõ yêu cầu |
+| `deep-dive` | Trace → Interview pipeline |
+| `trace` | Root-cause tracing |
+| `sciomc` | Parallel scientist agents phân tích |
+| `external-context` | Web search song song |
+| `ccg` | Claude + Codex + Gemini song song |
+| `ask` | Query bất kỳ AI model |
 
-## 80% ngày thường
+## OMC — Code Quality
 
-```
-/explore-repo        → nhớ lại project
-/fix-issue           → làm việc
-/git-helper commit   → commit
-/docker-ops update   → deploy
-```
+| Skill | Mô tả |
+|-------|-------|
+| `ai-slop-cleaner` | Dọn AI-generated code dư thừa |
+| `visual-verdict` | QA screenshot vs reference |
+| `deepinit` | Tạo AGENTS.md phân tầng cho repo |
+
+## OMC — Setup & Config
+
+| Skill | Mô tả |
+|-------|-------|
+| `omc-setup` | Setup wizard OMC |
+| `omc-doctor` | Chẩn đoán + fix cài đặt |
+| `omc-reference` | Catalog đầy đủ agents/tools |
+| `mcp-setup` | Cấu hình MCP servers |
+| `configure-notifications` | Telegram/Discord/Slack |
+| `hud` | Cấu hình HUD status bar |
+| `setup` | Unified setup entrypoint |
+| `skill` | Quản lý local skills |
+| `learner` | Trích xuất skill từ conversation |
+| `project-session-manager` | worktrees + tmux sessions |
+| `writer-memory` | Memory system cho writers |
+| `release` | Release workflow OMC |
