@@ -9,7 +9,17 @@ Analyze this repo. Use parallel tool calls aggressively. Argument (subsystem foc
 - If args start with `f `, `flow `, or equal `f`/`flow` → set FLOW_MODE=true, strip the prefix before processing
 - Otherwise FLOW_MODE=false
 
-**Sequence:**
+**Step 0.5: Detect code-graph MCP**
+Check if `mcp__code-graph__list_projects` is available:
+- If YES → use graph tools for dep tracing (faster, more accurate):
+  - `mcp__code-graph__list_projects` → find current repo
+  - `mcp__code-graph__get_file_symbols` on entrypoints instead of Grep
+  - `mcp__code-graph__get_callers` / `mcp__code-graph__get_callees` to trace critical paths
+  - `mcp__code-graph__get_file_imports` instead of grepping imports
+  - If repo not indexed yet → call `mcp__code-graph__reindex_repo` first
+- If NO → fall back to Glob/Grep sequence below
+
+**Sequence (fallback if no graph):**
 
 1. Glob root for: `package.json`, `go.mod`, `Cargo.toml`, `pyproject.toml`, `requirements*.txt`, `Makefile`, `Dockerfile`, `*.yaml`, `*.toml` — identify stack
 2. Read root configs. Locate entrypoints: `main.*`, `index.*`, `app.*`, `cmd/`, `src/`, `bin/`
