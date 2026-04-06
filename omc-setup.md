@@ -10,7 +10,7 @@ This is the **only command you need to learn**. After running this, everything e
 
 **When this skill is invoked, immediately execute the workflow below. Do not only restate or summarize these instructions back to the user.**
 
-Note: All `~/.claude/...` paths in this guide respect `CLAUDE_CONFIG_DIR` when that environment variable is set.
+Note: All `~/.gemini/antigravity/...` paths in this guide respect `CLAUDE_CONFIG_DIR` when that environment variable is set.
 
 ## Flag Parsing
 
@@ -30,8 +30,8 @@ OMC Setup - Configure oh-my-claudecode
 
 USAGE:
   /oh-my-claudecode:omc-setup           Run initial setup wizard (or update if already configured)
-  /oh-my-claudecode:omc-setup --local   Configure local project (.claude/CLAUDE.md)
-  /oh-my-claudecode:omc-setup --global  Configure global settings (~/.claude/CLAUDE.md)
+  /oh-my-claudecode:omc-setup --local   Configure local project (.gemini/antigravity/CLAUDE.md)
+  /oh-my-claudecode:omc-setup --global  Configure global settings (~/.gemini/antigravity/CLAUDE.md)
   /oh-my-claudecode:omc-setup --force   Force full setup wizard even if already configured
   /oh-my-claudecode:omc-setup --help    Show this help
 
@@ -46,15 +46,15 @@ MODES:
     - If already configured, offers quick update option
 
   Local Configuration (--local)
-    - Downloads fresh CLAUDE.md to ./.claude/
-    - Backs up existing CLAUDE.md to .claude/CLAUDE.md.backup.YYYY-MM-DD
+    - Downloads fresh CLAUDE.md to ./.gemini/antigravity/
+    - Backs up existing CLAUDE.md to .gemini/antigravity/CLAUDE.md.backup.YYYY-MM-DD
     - Project-specific settings
     - Use this to update project config after OMC upgrades
 
   Global Configuration (--global)
-    - Downloads fresh CLAUDE.md to ~/.claude/
-    - Backs up existing CLAUDE.md to ~/.claude/CLAUDE.md.backup.YYYY-MM-DD
-    - Applies to all Claude Code sessions
+    - Downloads fresh CLAUDE.md to ~/.gemini/antigravity/
+    - Backs up existing CLAUDE.md to ~/.gemini/antigravity/CLAUDE.md.backup.YYYY-MM-DD
+    - Applies to all Antigravity sessions
     - Cleans up legacy hooks
     - Use this to update global config after OMC upgrades
 
@@ -78,7 +78,7 @@ For more info: https://github.com/Yeachan-Heo/oh-my-claudecode
 
 ```bash
 # Check if setup was already completed
-CONFIG_FILE="$HOME/.claude/.omc-config.json"
+CONFIG_FILE="$HOME/.gemini/antigravity/.omc-config.json"
 
 if [ -f "$CONFIG_FILE" ]; then
   SETUP_COMPLETED=$(jq -r '.setupCompleted // empty' "$CONFIG_FILE" 2>/dev/null)
@@ -106,7 +106,7 @@ Use AskUserQuestion to prompt:
 3. **Cancel** - Exit without changes
 
 **If user chooses "Update CLAUDE.md only":**
-- Detect if local (.claude/CLAUDE.md) or global (~/.claude/CLAUDE.md) config exists
+- Detect if local (.gemini/antigravity/CLAUDE.md) or global (~/.gemini/antigravity/CLAUDE.md) config exists
 - If local exists, run: `bash "${CLAUDE_PLUGIN_ROOT}/scripts/setup-claude-md.sh" local`
 - If only global exists, run: `bash "${CLAUDE_PLUGIN_ROOT}/scripts/setup-claude-md.sh" global`
 - Skip all other steps

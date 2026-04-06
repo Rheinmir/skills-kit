@@ -1,4 +1,5 @@
 ---
+name: mornin
 description: Bắt đầu buổi sáng — load memory, check trạng thái repo + container, brief việc cần làm
 allowed-tools: Read, Glob, Grep, Bash, TodoWrite
 ---
@@ -6,7 +7,7 @@ allowed-tools: Read, Glob, Grep, Bash, TodoWrite
 Người dùng vừa mở phiên làm việc mới. Thực hiện theo thứ tự:
 
 **1. Thu thập context (parallel)**
-- Đọc `/Users/giatran/.claude/memory/MEMORY.md` để lấy index memory
+- Đọc `/Users/giatran/.gemini/antigravity/memory/MEMORY.md` để lấy index memory
 - Đọc các file memory liên quan đến project hiện tại (project_*.md, feedback_*.md)
 - Chạy `git log --oneline -5` để xem commits gần nhất
 - Chạy `git status --short` để xem files đang thay đổi

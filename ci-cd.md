@@ -1,4 +1,5 @@
 ---
+name: ci-cd
 description: CI/CD helper — push git để trigger pipeline, report luồng từ file triển khai có trong repo
 allowed-tools: Bash, Read, Glob, Grep
 ---

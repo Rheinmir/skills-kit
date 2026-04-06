@@ -73,7 +73,7 @@ Invoke built-in workflows via `/oh-my-claudecode:<name>`.
 - `ultrawork` — high-throughput parallel execution
 - `visual-verdict` — structured visual QA verdicts
 - `team` — coordinated team orchestration
-- `ccg` — Codex + Gemini + Claude synthesis lane
+- `ccg` — Codex + Gemini + Antigravity synthesis lane
 - `ultraqa` — QA cycle: test, verify, fix, repeat
 - `omc-plan` — planning workflow and `/plan`-safe alias
 - `ralplan` — consensus planning workflow
@@ -130,12 +130,12 @@ Use git trailers to preserve decision context in every commit message.
 ```text
 feat(docs): reduce always-loaded OMC instruction footprint
 
-Move reference-only orchestration content into a native Claude skill so
+Move reference-only orchestration content into a native Antigravity skill so
 session-start guidance stays small while detailed OMC reference remains available.
 
 Constraint: Preserve CLAUDE.md marker-based installation flow
 Rejected: Sync all built-in skills in legacy install | broader behavior change than issue requires
 Confidence: high
 Scope-risk: narrow
-Not-tested: End-to-end plugin marketplace install in a fresh Claude profile
+Not-tested: End-to-end plugin marketplace install in a fresh Antigravity profile
 ```

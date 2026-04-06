@@ -93,7 +93,7 @@ By default, ralph operates in PRD mode. A scaffold `prd.json` is auto-generated 
    - <5 files, <100 lines with full tests: STANDARD tier minimum (architect-medium / Sonnet)
    - Standard changes: STANDARD tier (architect-medium / Sonnet)
    - >20 files or security/architectural changes: THOROUGH tier (architect / Opus)
-   - If `--critic=critic`, use the Claude `critic` agent for the approval pass
+   - If `--critic=critic`, use the Antigravity `critic` agent for the approval pass
    - If `--critic=codex`, run `omc ask codex --agent-prompt critic "..."` for the approval pass
    - Ralph floor: always at least STANDARD, even for small changes
    - The selected reviewer verifies against the SPECIFIC acceptance criteria from prd.json, not vague "is it done?"

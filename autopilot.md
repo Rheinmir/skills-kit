@@ -75,7 +75,7 @@ Most non-trivial software tasks require coordinated phases: understanding requir
 - Use `Task(subagent_type="oh-my-claudecode:architect", ...)` for Phase 4 architecture validation
 - Use `Task(subagent_type="oh-my-claudecode:security-reviewer", ...)` for Phase 4 security review
 - Use `Task(subagent_type="oh-my-claudecode:code-reviewer", ...)` for Phase 4 quality review
-- Agents form their own analysis first, then spawn Claude Task agents for cross-validation
+- Agents form their own analysis first, then spawn Antigravity Task agents for cross-validation
 - Never block on external tools; proceed with available agents if delegation fails
 </Tool_Usage>
 
@@ -120,7 +120,7 @@ Why bad: This is an exploration/brainstorming request. Respond conversationally 
 <Advanced>
 ## Configuration
 
-Optional settings in `.claude/settings.json`:
+Optional settings in `.gemini/antigravity/settings.json`:
 
 ```json
 {

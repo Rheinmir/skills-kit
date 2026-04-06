@@ -1,4 +1,5 @@
 ---
+name: review-safe
 description: Safe code audit — read-only review, no edits, findings only
 allowed-tools: Read, Glob, Grep
 ---

@@ -22,7 +22,7 @@ Spawn N CLI worker processes in tmux panes to execute tasks in parallel. Support
 ### Parameters
 
 - **N** - Number of CLI workers (1-10)
-- **agent-type** - `claude` (Claude CLI), `codex` (OpenAI Codex CLI), or `gemini` (Google Gemini CLI)
+- **agent-type** - `claude` (Antigravity CLI), `codex` (OpenAI Codex CLI), or `gemini` (Google Gemini CLI)
 - **task** - Task description to distribute across all workers
 
 ### Examples
@@ -73,7 +73,7 @@ Validate before decomposing or running anything:
 
 - Reject unsupported agent types up front. `/omc-teams` only supports **`claude`**, **`codex`**, and **`gemini`**.
 - If the user asks for an unsupported type such as `expert`, explain that `/omc-teams` launches external CLI workers only.
-- For native Claude Code team agents/roles, direct them to **`/oh-my-claudecode:team`** instead.
+- For native Antigravity team agents/roles, direct them to **`/oh-my-claudecode:team`** instead.
 
 ### Phase 2: Decompose task
 
@@ -147,7 +147,7 @@ If encountered, switch to `omc team ...` CLI commands.
 | ---------------------------- | ----------------------------------- | ----------------------------------------------------------------------------------- |
 | `not inside tmux`            | Requested in-place pane topology from a non-tmux surface | Start tmux and rerun, or let `omc team` use its detached-session fallback           |
 | `cmux surface detected`      | Running inside cmux without `$TMUX` | Use the normal `omc team ...` flow; OMC will launch a detached tmux session         |
-| `Unsupported agent type`     | Requested agent is not claude/codex/gemini | Use `claude`, `codex`, or `gemini`; for native Claude Code agents use `/oh-my-claudecode:team` |
+| `Unsupported agent type`     | Requested agent is not claude/codex/gemini | Use `claude`, `codex`, or `gemini`; for native Antigravity agents use `/oh-my-claudecode:team` |
 | `codex: command not found`   | Codex CLI not installed             | `npm install -g @openai/codex`                                                      |
 | `gemini: command not found`  | Gemini CLI not installed            | `npm install -g @google/gemini-cli`                                                 |
 | `Team <name> is not running` | stale or missing runtime state      | `omc team status <team-name>` then `omc team shutdown <team-name> --force` if stale |
@@ -157,7 +157,7 @@ If encountered, switch to `omc team ...` CLI commands.
 
 | Aspect       | `/team`                                   | `/omc-teams`                                         |
 | ------------ | ----------------------------------------- | ---------------------------------------------------- |
-| Worker type  | Claude Code native team agents            | claude / codex / gemini CLI processes in tmux        |
+| Worker type  | Antigravity native team agents            | claude / codex / gemini CLI processes in tmux        |
 | Invocation   | `TeamCreate` / `Task` / `SendMessage`     | `omc team [N:agent]` + `status` + `shutdown` + `api` |
 | Coordination | Native team messaging and staged pipeline | tmux worker runtime + CLI API state files            |
-| Use when     | You want Claude-native team orchestration | You want external CLI worker execution               |
+| Use when     | You want Antigravity-native team orchestration | You want external CLI worker execution               |

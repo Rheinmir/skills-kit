@@ -1,4 +1,5 @@
 ---
+name: mcp-research
 description: MCP researcher — fetch docs/API/spec from GitHub, DB, internal tools via MCP
 allowed-tools: WebFetch, WebSearch, Bash
 ---

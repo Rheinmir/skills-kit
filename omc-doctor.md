@@ -6,7 +6,7 @@ level: 3
 
 # Doctor Skill
 
-Note: All `~/.claude/...` paths in this guide respect `CLAUDE_CONFIG_DIR` when that environment variable is set.
+Note: All `~/.gemini/antigravity/...` paths in this guide respect `CLAUDE_CONFIG_DIR` when that environment variable is set.
 
 ## Task: Run Installation Diagnostics
 
@@ -16,7 +16,7 @@ You are the OMC Doctor - diagnose and fix installation issues.
 
 ```bash
 # Get installed and latest versions (cross-platform)
-node -e "const p=require('path'),f=require('fs'),h=require('os').homedir(),d=process.env.CLAUDE_CONFIG_DIR||p.join(h,'.claude'),b=p.join(d,'plugins','cache','omc','oh-my-claudecode');try{const v=f.readdirSync(b).filter(x=>/^\d/.test(x)).sort((a,c)=>a.localeCompare(c,void 0,{numeric:true}));console.log('Installed:',v.length?v[v.length-1]:'(none)')}catch{console.log('Installed: (none)')}"
+node -e "const p=require('path'),f=require('fs'),h=require('os').homedir(),d=process.env.CLAUDE_CONFIG_DIR||p.join(h,'.gemini/antigravity'),b=p.join(d,'plugins','cache','omc','oh-my-claudecode');try{const v=f.readdirSync(b).filter(x=>/^\d/.test(x)).sort((a,c)=>a.localeCompare(c,void 0,{numeric:true}));console.log('Installed:',v.length?v[v.length-1]:'(none)')}catch{console.log('Installed: (none)')}"
 npm view oh-my-claudecode version 2>/dev/null || echo "Latest: (unavailable)"
 ```
 
@@ -27,10 +27,10 @@ npm view oh-my-claudecode version 2>/dev/null || echo "Latest: (unavailable)"
 
 ### Step 2: Check for Legacy Hooks in settings.json
 
-Read both `~/.claude/settings.json` (profile-level) and `./.claude/settings.json` (project-level) and check if there's a `"hooks"` key with entries like:
-- `bash $HOME/.claude/hooks/keyword-detector.sh`
-- `bash $HOME/.claude/hooks/persistent-mode.sh`
-- `bash $HOME/.claude/hooks/session-start.sh`
+Read both `~/.gemini/antigravity/settings.json` (profile-level) and `./.gemini/antigravity/settings.json` (project-level) and check if there's a `"hooks"` key with entries like:
+- `bash $HOME/.gemini/antigravity/hooks/keyword-detector.sh`
+- `bash $HOME/.gemini/antigravity/hooks/persistent-mode.sh`
+- `bash $HOME/.gemini/antigravity/hooks/session-start.sh`
 
 **Diagnosis**:
 - If found: CRITICAL - legacy hooks causing duplicates
@@ -38,7 +38,7 @@ Read both `~/.claude/settings.json` (profile-level) and `./.claude/settings.json
 ### Step 3: Check for Legacy Bash Hook Scripts
 
 ```bash
-ls -la ~/.claude/hooks/*.sh 2>/dev/null
+ls -la ~/.gemini/antigravity/hooks/*.sh 2>/dev/null
 ```
 
 **Diagnosis**:
@@ -48,19 +48,19 @@ ls -la ~/.claude/hooks/*.sh 2>/dev/null
 
 ```bash
 # Check if CLAUDE.md exists
-ls -la ~/.claude/CLAUDE.md 2>/dev/null
+ls -la ~/.gemini/antigravity/CLAUDE.md 2>/dev/null
 
 # Check for OMC markers (<!-- OMC:START --> is the canonical marker)
-grep -q "<!-- OMC:START -->" ~/.claude/CLAUDE.md 2>/dev/null && echo "Has OMC config" || echo "Missing OMC config in CLAUDE.md"
+grep -q "<!-- OMC:START -->" ~/.gemini/antigravity/CLAUDE.md 2>/dev/null && echo "Has OMC config" || echo "Missing OMC config in CLAUDE.md"
 
 # Check companion files for file-split pattern (e.g. CLAUDE-omc.md)
-find "$HOME/.claude" -maxdepth 1 -type f -name 'CLAUDE-*.md' -print 2>/dev/null
+find "$HOME/.gemini/antigravity" -maxdepth 1 -type f -name 'CLAUDE-*.md' -print 2>/dev/null
 while IFS= read -r f; do
   grep -q "<!-- OMC:START -->" "$f" 2>/dev/null && echo "Has OMC config in companion: $f"
-done < <(find "$HOME/.claude" -maxdepth 1 -type f -name 'CLAUDE-*.md' -print 2>/dev/null)
+done < <(find "$HOME/.gemini/antigravity" -maxdepth 1 -type f -name 'CLAUDE-*.md' -print 2>/dev/null)
 
 # Check if CLAUDE.md references a companion file
-grep -o "CLAUDE-[^ )]*\.md" ~/.claude/CLAUDE.md 2>/dev/null
+grep -o "CLAUDE-[^ )]*\.md" ~/.gemini/antigravity/CLAUDE.md 2>/dev/null
 ```
 
 **Diagnosis**:
@@ -73,7 +73,7 @@ grep -o "CLAUDE-[^ )]*\.md" ~/.claude/CLAUDE.md 2>/dev/null
 
 ```bash
 # Count versions in cache (cross-platform)
-node -e "const p=require('path'),f=require('fs'),h=require('os').homedir(),d=process.env.CLAUDE_CONFIG_DIR||p.join(h,'.claude'),b=p.join(d,'plugins','cache','omc','oh-my-claudecode');try{const v=f.readdirSync(b).filter(x=>/^\d/.test(x));console.log(v.length+' version(s):',v.join(', '))}catch{console.log('0 versions')}"
+node -e "const p=require('path'),f=require('fs'),h=require('os').homedir(),d=process.env.CLAUDE_CONFIG_DIR||p.join(h,'.gemini/antigravity'),b=p.join(d,'plugins','cache','omc','oh-my-claudecode');try{const v=f.readdirSync(b).filter(x=>/^\d/.test(x));console.log(v.length+' version(s):',v.join(', '))}catch{console.log('0 versions')}"
 ```
 
 **Diagnosis**:
@@ -86,19 +86,19 @@ Check for legacy agents, commands, and skills installed via curl (before plugin 
 
 ```bash
 # Check for legacy agents directory
-ls -la ~/.claude/agents/ 2>/dev/null
+ls -la ~/.gemini/antigravity/agents/ 2>/dev/null
 
 # Check for legacy commands directory
-ls -la ~/.claude/commands/ 2>/dev/null
+ls -la ~/.gemini/antigravity/commands/ 2>/dev/null
 
 # Check for legacy skills directory
-ls -la ~/.claude/skills/ 2>/dev/null
+ls -la ~/.gemini/antigravity/skills/ 2>/dev/null
 ```
 
 **Diagnosis**:
-- If `~/.claude/agents/` exists with files matching plugin agent names: WARN - legacy agents (now provided by plugin)
-- If `~/.claude/commands/` exists with files matching plugin command names: WARN - legacy commands (now provided by plugin)
-- If `~/.claude/skills/` exists with files matching plugin skill names: WARN - legacy skills (now provided by plugin)
+- If `~/.gemini/antigravity/agents/` exists with files matching plugin agent names: WARN - legacy agents (now provided by plugin)
+- If `~/.gemini/antigravity/commands/` exists with files matching plugin command names: WARN - legacy commands (now provided by plugin)
+- If `~/.gemini/antigravity/skills/` exists with files matching plugin skill names: WARN - legacy skills (now provided by plugin)
 - If custom files exist that do NOT match plugin names: OK - these are user custom content, do not flag them
 
 **Known plugin agent names** (check agents/ for these):
@@ -128,12 +128,12 @@ After running all checks, output a report:
 |-------|--------|---------|
 | Plugin Version | OK/WARN/CRITICAL | ... |
 | Legacy Hooks (settings.json) | OK/CRITICAL | ... |
-| Legacy Scripts (~/.claude/hooks/) | OK/WARN | ... |
+| Legacy Scripts (~/.gemini/antigravity/hooks/) | OK/WARN | ... |
 | CLAUDE.md | OK/WARN/CRITICAL | ... |
 | Plugin Cache | OK/WARN | ... |
-| Legacy Agents (~/.claude/agents/) | OK/WARN | ... |
-| Legacy Commands (~/.claude/commands/) | OK/WARN | ... |
-| Legacy Skills (~/.claude/skills/) | OK/WARN | ... |
+| Legacy Agents (~/.gemini/antigravity/agents/) | OK/WARN | ... |
+| Legacy Commands (~/.gemini/antigravity/commands/) | OK/WARN | ... |
+| Legacy Skills (~/.gemini/antigravity/skills/) | OK/WARN | ... |
 
 ### Issues Found
 1. [Issue description]
@@ -152,30 +152,30 @@ If issues found, ask user: "Would you like me to fix these issues automatically?
 If yes, apply fixes:
 
 ### Fix: Legacy Hooks in settings.json
-Remove the `"hooks"` section from `~/.claude/settings.json` (keep other settings intact)
+Remove the `"hooks"` section from `~/.gemini/antigravity/settings.json` (keep other settings intact)
 
 ### Fix: Legacy Bash Scripts
 ```bash
-rm -f ~/.claude/hooks/keyword-detector.sh
-rm -f ~/.claude/hooks/persistent-mode.sh
-rm -f ~/.claude/hooks/session-start.sh
-rm -f ~/.claude/hooks/stop-continuation.sh
+rm -f ~/.gemini/antigravity/hooks/keyword-detector.sh
+rm -f ~/.gemini/antigravity/hooks/persistent-mode.sh
+rm -f ~/.gemini/antigravity/hooks/session-start.sh
+rm -f ~/.gemini/antigravity/hooks/stop-continuation.sh
 ```
 
 ### Fix: Outdated Plugin
 ```bash
 # Clear plugin cache (cross-platform)
-node -e "const p=require('path'),f=require('fs'),d=process.env.CLAUDE_CONFIG_DIR||p.join(require('os').homedir(),'.claude'),b=p.join(d,'plugins','cache','omc','oh-my-claudecode');try{f.rmSync(b,{recursive:true,force:true});console.log('Plugin cache cleared. Restart Claude Code to fetch latest version.')}catch{console.log('No plugin cache found')}"
+node -e "const p=require('path'),f=require('fs'),d=process.env.CLAUDE_CONFIG_DIR||p.join(require('os').homedir(),'.gemini/antigravity'),b=p.join(d,'plugins','cache','omc','oh-my-claudecode');try{f.rmSync(b,{recursive:true,force:true});console.log('Plugin cache cleared. Restart Antigravity to fetch latest version.')}catch{console.log('No plugin cache found')}"
 ```
 
 ### Fix: Stale Cache (multiple versions)
 ```bash
 # Keep only latest version (cross-platform)
-node -e "const p=require('path'),f=require('fs'),h=require('os').homedir(),d=process.env.CLAUDE_CONFIG_DIR||p.join(h,'.claude'),b=p.join(d,'plugins','cache','omc','oh-my-claudecode');try{const v=f.readdirSync(b).filter(x=>/^\d/.test(x)).sort((a,c)=>a.localeCompare(c,void 0,{numeric:true}));v.slice(0,-1).forEach(x=>f.rmSync(p.join(b,x),{recursive:true,force:true}));console.log('Removed',v.length-1,'old version(s)')}catch(e){console.log('No cache to clean')}"
+node -e "const p=require('path'),f=require('fs'),h=require('os').homedir(),d=process.env.CLAUDE_CONFIG_DIR||p.join(h,'.gemini/antigravity'),b=p.join(d,'plugins','cache','omc','oh-my-claudecode');try{const v=f.readdirSync(b).filter(x=>/^\d/.test(x)).sort((a,c)=>a.localeCompare(c,void 0,{numeric:true}));v.slice(0,-1).forEach(x=>f.rmSync(p.join(b,x),{recursive:true,force:true}));console.log('Removed',v.length-1,'old version(s)')}catch(e){console.log('No cache to clean')}"
 ```
 
 ### Fix: Missing/Outdated CLAUDE.md
-Fetch latest from GitHub and write to `~/.claude/CLAUDE.md`:
+Fetch latest from GitHub and write to `~/.gemini/antigravity/CLAUDE.md`:
 ```
 WebFetch(url: "https://raw.githubusercontent.com/Yeachan-Heo/oh-my-claudecode/main/docs/CLAUDE.md", prompt: "Return the complete raw markdown content exactly as-is")
 ```
@@ -186,14 +186,14 @@ Remove legacy agents, commands, and skills directories (now provided by plugin):
 
 ```bash
 # Backup first (optional - ask user)
-# mv ~/.claude/agents ~/.claude/agents.bak
-# mv ~/.claude/commands ~/.claude/commands.bak
-# mv ~/.claude/skills ~/.claude/skills.bak
+# mv ~/.gemini/antigravity/agents ~/.gemini/antigravity/agents.bak
+# mv ~/.gemini/antigravity/commands ~/.gemini/antigravity/commands.bak
+# mv ~/.gemini/antigravity/skills ~/.gemini/antigravity/skills.bak
 
 # Or remove directly
-rm -rf ~/.claude/agents
-rm -rf ~/.claude/commands
-rm -rf ~/.claude/skills
+rm -rf ~/.gemini/antigravity/agents
+rm -rf ~/.gemini/antigravity/commands
+rm -rf ~/.gemini/antigravity/skills
 ```
 
 **Note**: Only remove if these contain oh-my-claudecode-related files. If user has custom agents/commands/skills, warn them and ask before removing.
@@ -203,4 +203,4 @@ rm -rf ~/.claude/skills
 ## Post-Fix
 
 After applying fixes, inform user:
-> Fixes applied. **Restart Claude Code** for changes to take effect.
+> Fixes applied. **Restart Antigravity** for changes to take effect.

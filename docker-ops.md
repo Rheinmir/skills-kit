@@ -1,4 +1,5 @@
 ---
+name: docker-ops
 description: Docker ops — check status, build, update/restart containers, cleanup
 allowed-tools: Bash, Glob, Read
 ---

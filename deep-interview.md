@@ -517,7 +517,7 @@ Why bad: 45% ambiguity means nearly half the requirements are unclear. The mathe
 <Advanced>
 ## Configuration
 
-Optional settings in `.claude/settings.json`:
+Optional settings in `.gemini/antigravity/settings.json`:
 
 ```json
 {

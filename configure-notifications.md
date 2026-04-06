@@ -43,12 +43,12 @@ Set up Telegram notifications so OMC can message you when sessions end, need inp
 
 ### How This Skill Works
 
-This is an interactive, natural-language configuration skill. Walk the user through setup by asking questions with AskUserQuestion. Write the result to `~/.claude/.omc-config.json`.
+This is an interactive, natural-language configuration skill. Walk the user through setup by asking questions with AskUserQuestion. Write the result to `~/.gemini/antigravity/.omc-config.json`.
 
 ### Step 1: Detect Existing Configuration
 
 ```bash
-CONFIG_FILE="$HOME/.claude/.omc-config.json"
+CONFIG_FILE="$HOME/.gemini/antigravity/.omc-config.json"
 
 if [ -f "$CONFIG_FILE" ]; then
   HAS_TELEGRAM=$(jq -r '.notifications.telegram.enabled // false' "$CONFIG_FILE" 2>/dev/null)
@@ -139,8 +139,8 @@ Use AskUserQuestion with multiSelect:
 **Question:** "Which events should trigger Telegram notifications?"
 
 **Options (multiSelect: true):**
-1. **Session end (Recommended)** - When a Claude session finishes
-2. **Input needed** - When Claude is waiting for your response (great for long-running tasks)
+1. **Session end (Recommended)** - When a Antigravity session finishes
+2. **Input needed** - When Antigravity is waiting for your response (great for long-running tasks)
 3. **Session start** - When a new session begins
 4. **Session continuing** - When a persistent mode keeps the session alive
 
@@ -151,7 +151,7 @@ Default selection: session-end + ask-user-question.
 Read the existing config, merge the new Telegram settings, and write back:
 
 ```bash
-CONFIG_FILE="$HOME/.claude/.omc-config.json"
+CONFIG_FILE="$HOME/.gemini/antigravity/.omc-config.json"
 mkdir -p "$(dirname "$CONFIG_FILE")"
 
 if [ -f "$CONFIG_FILE" ]; then
@@ -239,7 +239,7 @@ Telegram Notifications Configured!
   Format:     Markdown
   Events:     session-end, ask-user-question
 
-Config saved to: ~/.claude/.omc-config.json
+Config saved to: ~/.gemini/antigravity/.omc-config.json
 
 You can also set these via environment variables:
   OMC_TELEGRAM_BOT_TOKEN=123456789:ABCdefGHI...
@@ -269,12 +269,12 @@ Set up Discord notifications so OMC can ping you when sessions end, need input, 
 
 ### How This Skill Works
 
-This is an interactive, natural-language configuration skill. Walk the user through setup by asking questions with AskUserQuestion. Write the result to `~/.claude/.omc-config.json`.
+This is an interactive, natural-language configuration skill. Walk the user through setup by asking questions with AskUserQuestion. Write the result to `~/.gemini/antigravity/.omc-config.json`.
 
 ### Step 1: Detect Existing Configuration
 
 ```bash
-CONFIG_FILE="$HOME/.claude/.omc-config.json"
+CONFIG_FILE="$HOME/.gemini/antigravity/.omc-config.json"
 
 if [ -f "$CONFIG_FILE" ]; then
   # Check for existing discord config
@@ -362,8 +362,8 @@ Use AskUserQuestion with multiSelect:
 **Question:** "Which events should trigger Discord notifications?"
 
 **Options (multiSelect: true):**
-1. **Session end (Recommended)** - When a Claude session finishes
-2. **Input needed** - When Claude is waiting for your response (great for long-running tasks)
+1. **Session end (Recommended)** - When a Antigravity session finishes
+2. **Input needed** - When Antigravity is waiting for your response (great for long-running tasks)
 3. **Session start** - When a new session begins
 4. **Session continuing** - When a persistent mode keeps the session alive
 
@@ -377,7 +377,7 @@ Use AskUserQuestion:
 
 **Options:**
 1. **OMC (default)** - Display as "OMC"
-2. **Claude Code** - Display as "Claude Code"
+2. **Antigravity** - Display as "Antigravity"
 3. **Custom** - Enter a custom name
 
 ### Step 7: Write Configuration
@@ -385,7 +385,7 @@ Use AskUserQuestion:
 Read the existing config, merge the new Discord settings, and write back:
 
 ```bash
-CONFIG_FILE="$HOME/.claude/.omc-config.json"
+CONFIG_FILE="$HOME/.gemini/antigravity/.omc-config.json"
 mkdir -p "$(dirname "$CONFIG_FILE")"
 
 if [ -f "$CONFIG_FILE" ]; then
@@ -481,7 +481,7 @@ Discord Notifications Configured!
   Events:   session-end, ask-user-question
   Username: OMC
 
-Config saved to: ~/.claude/.omc-config.json
+Config saved to: ~/.gemini/antigravity/.omc-config.json
 
 You can also set these via environment variables:
   OMC_DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/...
@@ -519,12 +519,12 @@ Set up Slack notifications so OMC can message you when sessions end, need input,
 
 ### How This Skill Works
 
-This is an interactive, natural-language configuration skill. Walk the user through setup by asking questions with AskUserQuestion. Write the result to `~/.claude/.omc-config.json`.
+This is an interactive, natural-language configuration skill. Walk the user through setup by asking questions with AskUserQuestion. Write the result to `~/.gemini/antigravity/.omc-config.json`.
 
 ### Step 1: Detect Existing Configuration
 
 ```bash
-CONFIG_FILE="$HOME/.claude/.omc-config.json"
+CONFIG_FILE="$HOME/.gemini/antigravity/.omc-config.json"
 
 if [ -f "$CONFIG_FILE" ]; then
   HAS_SLACK=$(jq -r '.notifications.slack.enabled // false' "$CONFIG_FILE" 2>/dev/null)
@@ -610,8 +610,8 @@ Use AskUserQuestion with multiSelect:
 **Question:** "Which events should trigger Slack notifications?"
 
 **Options (multiSelect: true):**
-1. **Session end (Recommended)** - When a Claude session finishes
-2. **Input needed** - When Claude is waiting for your response (great for long-running tasks)
+1. **Session end (Recommended)** - When a Antigravity session finishes
+2. **Input needed** - When Antigravity is waiting for your response (great for long-running tasks)
 3. **Session start** - When a new session begins
 4. **Session continuing** - When a persistent mode keeps the session alive
 
@@ -637,7 +637,7 @@ Use AskUserQuestion:
 
 **Options:**
 1. **OMC (default)** - Display as "OMC"
-2. **Claude Code** - Display as "Claude Code"
+2. **Antigravity** - Display as "Antigravity"
 3. **Custom** - Enter a custom name
 
 ### Step 8: Write Configuration
@@ -645,7 +645,7 @@ Use AskUserQuestion:
 Read the existing config, merge the new Slack settings, and write back:
 
 ```bash
-CONFIG_FILE="$HOME/.claude/.omc-config.json"
+CONFIG_FILE="$HOME/.gemini/antigravity/.omc-config.json"
 mkdir -p "$(dirname "$CONFIG_FILE")"
 
 if [ -f "$CONFIG_FILE" ]; then
@@ -728,7 +728,7 @@ Slack Notifications Configured!
   Events:   session-end, ask-user-question
   Username: OMC
 
-Config saved to: ~/.claude/.omc-config.json
+Config saved to: ~/.gemini/antigravity/.omc-config.json
 
 You can also set these via environment variables:
   OMC_SLACK_WEBHOOK_URL=https://hooks.slack.com/services/...
@@ -792,14 +792,14 @@ If the trigger or argument contains "hook", "template", or "customize messages" 
 
 ### Step 1: Detect Existing Hook Config
 
-Check if `~/.claude/omc_config.hook.json` exists. If it does, show the current configuration. If not, explain what it does.
+Check if `~/.gemini/antigravity/omc_config.hook.json` exists. If it does, show the current configuration. If not, explain what it does.
 
 ```
 Hook event templates let you customize the notification messages sent to each platform.
 You can set different messages for Discord vs Telegram vs Slack, and control which
 events fire on which platform.
 
-Config file: ~/.claude/omc_config.hook.json
+Config file: ~/.gemini/antigravity/omc_config.hook.json
 ```
 
 ### Step 2: Choose Event to Configure
@@ -809,9 +809,9 @@ Use AskUserQuestion:
 **Question:** "Which event would you like to configure templates for?"
 
 **Options:**
-1. **session-end** - When a Claude session finishes (most common)
-2. **ask-user-question** - When Claude is waiting for input
-3. **session-idle** - When Claude finishes and waits for input
+1. **session-end** - When a Antigravity session finishes (most common)
+2. **ask-user-question** - When Antigravity is waiting for input
+3. **session-idle** - When Antigravity finishes and waits for input
 4. **session-start** - When a new session begins
 
 ### Step 3: Show Available Variables
@@ -879,7 +879,7 @@ If per-platform: ask for each enabled platform's template separately.
 
 ### Step 6: Write Configuration
 
-Read or create `~/.claude/omc_config.hook.json` and merge the new settings:
+Read or create `~/.gemini/antigravity/omc_config.hook.json` and merge the new settings:
 
 ```json
 {
@@ -949,11 +949,11 @@ If the user says "custom integration", "openclaw", "n8n", "webhook", "cli comman
 
 ### Migration from OpenClaw
 
-If `~/.claude/omc_config.openclaw.json` exists, detect and offer migration:
+If `~/.gemini/antigravity/omc_config.openclaw.json` exists, detect and offer migration:
 
 **Step 1: Detect Legacy Config**
 ```bash
-LEGACY_CONFIG="$HOME/.claude/omc_config.openclaw.json"
+LEGACY_CONFIG="$HOME/.gemini/antigravity/omc_config.openclaw.json"
 if [ -f "$LEGACY_CONFIG" ]; then
   echo "LEGACY_FOUND=true"
   # Check if already migrated

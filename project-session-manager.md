@@ -17,7 +17,7 @@ level: 2
 > ```
 > See [Teleport Command](#teleport-command) below for details.
 
-Automate isolated development environments using git worktrees and tmux sessions with Claude Code. Enables parallel work across multiple tasks, projects, and repositories.
+Automate isolated development environments using git worktrees and tmux sessions with Antigravity. Enables parallel work across multiple tasks, projects, and repositories.
 
 Canonical slash command: `/oh-my-claudecode:project-session-manager` (alias: `/oh-my-claudecode:psm`).
 
@@ -248,7 +248,7 @@ Parse `{{ARGUMENTS}}` to determine:
    tmux new-session -d -s "psm:$project_alias:pr-$pr_number" -c "$worktree_path"
    ```
 
-8. **Launch Claude Code** (unless --no-claude):
+8. **Launch Antigravity** (unless --no-claude):
    ```bash
    tmux send-keys -t "psm:$project_alias:pr-$pr_number" "claude" Enter
    ```
@@ -511,7 +511,7 @@ omc teleport remove --force feat/my-repo-my-feature
 |---------|-----|----------|
 | Git worktree | Yes | Yes |
 | Tmux session | Yes | No |
-| Claude Code launch | Yes | No |
+| Antigravity launch | Yes | No |
 | Session registry | Yes | No |
 | Auto-cleanup | Yes | No |
 | Project aliases | Yes | No (uses current repo) |

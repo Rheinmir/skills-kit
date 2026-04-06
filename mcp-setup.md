@@ -6,11 +6,11 @@ level: 2
 
 # MCP Setup
 
-Configure Model Context Protocol (MCP) servers to extend Claude Code's capabilities with external tools like web search, file system access, and GitHub integration.
+Configure Model Context Protocol (MCP) servers to extend Antigravity's capabilities with external tools like web search, file system access, and GitHub integration.
 
 ## Overview
 
-MCP servers provide additional tools that Claude Code agents can use. This skill helps you configure popular MCP servers using the `claude mcp add` command-line interface.
+MCP servers provide additional tools that Antigravity agents can use. This skill helps you configure popular MCP servers using the `claude mcp add` command-line interface.
 
 ## Step 1: Show Available MCP Servers
 
@@ -109,7 +109,7 @@ CONFIGURED SERVERS:
 [List the servers that were configured]
 
 NEXT STEPS:
-1. Restart Claude Code for changes to take effect
+1. Restart Antigravity for changes to take effect
 2. The configured MCP tools will be available to all agents
 3. Run `claude mcp list` to verify configuration
 
@@ -177,7 +177,7 @@ claude mcp add --transport http --header "Authorization: Bearer <token>" <server
 - Re-run `claude mcp add` with correct credentials if needed
 
 ### Agents Still Using Built-in Tools
-- Restart Claude Code after configuration
+- Restart Antigravity after configuration
 - The built-in websearch will be deprioritized when exa is configured
 - Run `claude mcp list` to confirm servers are active
 

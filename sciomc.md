@@ -461,7 +461,7 @@ Report generator embeds figures:
 
 ## Configuration
 
-Optional settings in `.claude/settings.json`:
+Optional settings in `.gemini/antigravity/settings.json`:
 
 ```json
 {

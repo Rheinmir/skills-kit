@@ -1,4 +1,5 @@
 ---
+name: git-helper
 description: Git helper — branch name, commit message, changelog, PR summary
 allowed-tools: Bash
 ---

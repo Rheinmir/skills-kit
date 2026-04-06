@@ -1,4 +1,5 @@
 ---
+name: explore-repo
 description: Map repo — entrypoints, dep flow, env config, build/run/test paths. Prefix "f" or "flow" to also render a Mermaid architecture diagram.
 allowed-tools: Read, Glob, Grep, Bash
 ---

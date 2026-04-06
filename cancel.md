@@ -51,7 +51,7 @@ Active modes are still cancelled in dependency order:
 5. Swarm (standalone)
 6. Ultrapilot (standalone)
 7. Pipeline (standalone)
-8. Team (Claude Code native)
+8. Team (Antigravity native)
 9. OMC Teams (tmux CLI workers)
 10. Plan Consensus (standalone)
 
@@ -71,7 +71,7 @@ Steps under the hood:
 1. `state_list_active` enumerates `.omc/state/sessions/{sessionId}/…` to find every known session.
 2. `state_clear` runs once per session to drop that session’s files.
 3. A global `state_clear` without `session_id` removes legacy files under `.omc/state/*.json`, `.omc/state/swarm*.db`, and compatibility artifacts (see list).
-4. Team artifacts (`~/.claude/teams/*/`, `~/.claude/tasks/*/`, `.omc/state/team-state.json`) are best-effort cleared as part of the legacy fallback.
+4. Team artifacts (`~/.gemini/antigravity/teams/*/`, `~/.gemini/antigravity/tasks/*/`, `.omc/state/team-state.json`) are best-effort cleared as part of the legacy fallback.
    - Cancel for native team does NOT affect omc-teams state, and vice versa.
 
 Every `state_clear` command honors the `session_id` argument, so even force mode still uses the session-aware paths first before deleting legacy files.
@@ -131,20 +131,20 @@ Use force mode to clear every session plus legacy artifacts via `state_clear`. D
 
 ### 3B. Smart Cancellation (default)
 
-#### If Team Active (Claude Code native)
+#### If Team Active (Antigravity native)
 
-Teams are detected by checking for config files in `~/.claude/teams/`:
+Teams are detected by checking for config files in `~/.gemini/antigravity/teams/`:
 
 ```bash
 # Check for active teams
-TEAM_CONFIGS=$(find ~/.claude/teams -name config.json -maxdepth 2 2>/dev/null)
+TEAM_CONFIGS=$(find ~/.gemini/antigravity/teams -name config.json -maxdepth 2 2>/dev/null)
 ```
 
 **Two-pass cancellation protocol:**
 
 **Pass 1: Graceful Shutdown**
 ```
-For each team found in ~/.claude/teams/:
+For each team found in ~/.gemini/antigravity/teams/:
   1. Read config.json to get team_name and members list
   2. For each non-lead member:
      a. Send shutdown_request via SendMessage
@@ -168,7 +168,7 @@ After graceful pass:
 
 **TeamDelete + Cleanup:**
 ```
-  1. Call TeamDelete() — removes ~/.claude/teams/{name}/ and ~/.claude/tasks/{name}/
+  1. Call TeamDelete() — removes ~/.gemini/antigravity/teams/{name}/ and ~/.gemini/antigravity/tasks/{name}/
   2. Clear team state: state_clear(mode="team")
   3. Check for linked ralph: state_read(mode="ralph") — if linked_team is true:
      a. Clear ralph state: state_clear(mode="ralph")
@@ -199,11 +199,11 @@ Team "{team_name}" cancelled:
   - Unresponsive: K (list names if any)
   - TeamDelete: success/failed
   - Manual cleanup needed: yes/no
-    Path: ~/.claude/teams/{name}/ and ~/.claude/tasks/{name}/
+    Path: ~/.gemini/antigravity/teams/{name}/ and ~/.gemini/antigravity/tasks/{name}/
 ```
 
 **Implementation note:** The cancel skill is executed by the LLM, not as a bash script. When you detect an active team:
-1. Read `~/.claude/teams/*/config.json` to find active teams
+1. Read `~/.gemini/antigravity/teams/*/config.json` to find active teams
 2. If multiple teams exist, cancel oldest first (by `createdAt`)
 3. For each non-lead member, call `SendMessage(type: "shutdown_request", recipient: member-name, content: "Cancelling")`
 4. Wait briefly for shutdown responses (15s per member timeout)
@@ -253,7 +253,7 @@ The cancel skill runs as follows:
 2. Use `state_list_active` to enumerate known session ids and `state_get_status` to learn the active mode (`autopilot`, `ralph`, `ultrawork`, etc.) for each session.
 3. When operating in default mode, call `state_clear` with that session_id to remove only the session’s files, then run mode-specific cleanup (autopilot → ralph → …) based on the state tool signals.
 4. In force mode, iterate every active session, call `state_clear` per session, then run a global `state_clear` without `session_id` to drop legacy files (`.omc/state/*.json`, compatibility artifacts) and report success. Swarm remains a shared SQLite/marker mode outside session scoping.
-5. Team artifacts (`~/.claude/teams/*/`, `~/.claude/tasks/*/`, `.omc/state/team-state.json`) remain best-effort cleanup items invoked during the legacy/global pass.
+5. Team artifacts (`~/.gemini/antigravity/teams/*/`, `~/.gemini/antigravity/tasks/*/`, `.omc/state/team-state.json`) remain best-effort cleanup items invoked during the legacy/global pass.
 
 State tools always honor the `session_id` argument, so even force mode still clears the session-scoped paths before deleting compatibility-only legacy state.
 
@@ -294,7 +294,7 @@ Mode-specific subsections below describe what extra cleanup each handler perform
 - **Safe**: Only clears linked Ultrawork, preserves standalone Ultrawork
 - **Local-only**: Clears state files in `.omc/state/` directory
 - **Resume-friendly**: Autopilot state is preserved for seamless resume
-- **Team-aware**: Detects native Claude Code teams and performs graceful shutdown
+- **Team-aware**: Detects native Antigravity teams and performs graceful shutdown
 
 ## MCP Worker Cleanup
 

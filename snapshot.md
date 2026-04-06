@@ -1,4 +1,5 @@
 ---
+name: snapshot
 description: Snapshot code tại thời điểm hiện tại — backup an toàn, rollback ngay nếu cần
 allowed-tools: Bash
 ---
@@ -15,7 +16,7 @@ fi
 
 PROJECT_NAME=$(basename "$(pwd)" | tr ' ' '_')
 TIMESTAMP=$(date +%Y%m%d-%H%M%S)
-BACKUP_BASE="$HOME/.claude/backups/snapshots/$PROJECT_NAME"
+BACKUP_BASE="$HOME/.gemini/antigravity/backups/snapshots/$PROJECT_NAME"
 
 if [ "$IS_GIT" = true ]; then
   # Git repo: stash nếu dirty, ghi commit nếu clean
